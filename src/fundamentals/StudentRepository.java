@@ -2,45 +2,58 @@ package fundamentals;
 
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
+import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StudentRepository {
     public static boolean isDataInitialized = false;
     public static HashMap<String, HashMap<String, ArrayList<Integer>>> studentsByCourse;
 
-    public static void initializeData(String fileName) {
+    public static void initializeData(String fileName) throws IOException {
         if (isDataInitialized) {
             System.out.println(ExceptionMessages.EXAMPLE_EXCEPTION_MESSAGE);
             return;
         }
 
         studentsByCourse = new HashMap<String, HashMap<String, ArrayList<Integer>>>();
-        readData();
+        readData(fileName);
     }
 
-    private static void readData() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+    private static void readData(String fileName) throws IOException {
+        String regex = "([A-Z][a-zA-Z#+]*_[A-Z][a-z]{2}_\\d{4})\\s+([A-Z][a-z]{0,3}\\d{2}_\\d{2,4})\\s+(\\d+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher;
 
-        while (!input.equals("")) {
-            String[] tokens = input.split("\\s+");
-            String course = tokens[0];
-            String student = tokens[1];
-            Integer mark = Integer.parseInt(tokens[2]);
+        String path = SessionData.currentPath + "\\" + fileName;
+        List<String> lines = Files.readAllLines(Paths.get(path));
 
-            if (!studentsByCourse.containsKey(course)) {
-                studentsByCourse.put(course, new HashMap<>());
+        for (String line : lines) {
+            matcher = pattern.matcher(line);
+
+            if (!line.isEmpty() && matcher.find()) {
+                String course = matcher.group(1);
+                String student = matcher.group(2);
+                Integer mark = Integer.parseInt(matcher.group(3));
+
+                if (!studentsByCourse.containsKey(course)) {
+                    studentsByCourse.put(course, new HashMap<>());
+                }
+
+                if (!studentsByCourse.get(course).containsKey(student)) {
+                    studentsByCourse.get(course).put(student, new ArrayList<>());
+                }
+
+                studentsByCourse.get(course).get(student).add(mark);
+
+                isDataInitialized = true;
+                OutputWriter.writeMessageOnNewLine("Data read.");
             }
-
-            if (!studentsByCourse.get(course).containsKey(student)) {
-                studentsByCourse.get(course).put(student, new ArrayList<>());
-            }
-
-            studentsByCourse.get(course).get(student).add(mark);
-
-            isDataInitialized = true;
-            OutputWriter.writeMessageOnNewLine("Data read.");
-            input = scanner.nextLine();
         }
     }
 

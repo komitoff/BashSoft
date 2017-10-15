@@ -10,10 +10,13 @@ import java.util.List;
 
 public class CommandInterpreter {
 
-    public static void interpretCommand(String input) {
+    public static void interpretCommand(String input) throws IOException {
         String[] data = input.split(" ");
         String command = data[0];
         switch (command) {
+            case "show" :
+                tryShowWantedCourse(input, data);
+                break;
             case "mkdir":
                 tryCreateDirectory(input, data);
                 break;
@@ -29,7 +32,7 @@ public class CommandInterpreter {
             case "changeDirAbs":
                 tryChangeAbsolutePath(input, data);
                 break;
-            case "readDb":
+            case "readDB":
                 tryReadDatabaseFromFile(input, data);
                 break;
             case "filter":
@@ -48,6 +51,24 @@ public class CommandInterpreter {
             default:
                 displayInvalidCommand(input);
                 break;
+        }
+    }
+
+    private static void tryShowWantedCourse(String input, String[] data) {
+        if (data.length != 2 && data.length != 3) {
+            displayInvalidCommand(input);
+            return;
+        }
+
+        if (data.length == 2) {
+            String courseName = data[1];
+            StudentRepository.getStudentsByCourse(courseName);
+        }
+
+        if (data.length == 3) {
+            String courseName = data[1];
+            String studentName = data[2];
+            StudentRepository.getStudentMarksInCourse(courseName, studentName);
         }
     }
 
@@ -120,7 +141,7 @@ public class CommandInterpreter {
         IOManager.createDirectoryInCurrentFolder(data[1]);
     }
 
-    private static void tryReadDatabaseFromFile (String input, String[] data) {
+    private static void tryReadDatabaseFromFile (String input, String[] data) throws IOException {
         if (data.length != 2) {
             displayInvalidCommand(input);
             return;

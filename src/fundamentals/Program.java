@@ -12,7 +12,8 @@ public class Program {
 //        String testPath2 = "D:\\SoftUni\\BashSoft\\BashSoft\\Resources\\BashSoft\\03. Java-Advanced-BashSoft-Lab\\test3.txt";
 //        Tester.compareContent(testPath1, testPath2);
 //        IOManager.createDirectoryInCurrentFolder("pesho");
-        IOManager.changeCurrentDirRelativePath("..");
-        IOManager.createDirectoryInCurrentFolder("testDir");
+//        IOManager.changeCurrentDirRelativePath("..");
+//        IOManager.createDirectoryInCurrentFolder("testDir");
+        InputReader.readCommands();
     }
 }
