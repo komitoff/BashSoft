@@ -1,5 +1,7 @@
 package fundamentals;
 
+import java.util.List;
+
 public class OutputWriter {
 
     public static void writeMessage(String message) {
@@ -16,5 +18,10 @@ public class OutputWriter {
 
     public static void displayException(String message) {
         System.out.print(message);
+    }
+
+    public static void printStudent(String name, List<Integer> marks){
+        String output = String.format("%s - %s", name, marks.toString());
+        OutputWriter.writeMessageOnNewLine(output);
     }
 }

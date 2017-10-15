@@ -7,10 +7,6 @@ import java.util.LinkedList;
 
 public class IOManager {
 
-    public static void main(String[] args) {
-        traverseDirectory("D:\\SoftUni\\BashSoft\\BashSoft");
-    }
-
     public static void traverseDirectory(String path) {
         LinkedList<File> subFolders = new LinkedList<>();
         File root = new File(path);
