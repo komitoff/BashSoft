@@ -32,18 +32,21 @@ public class CommandInterpreter {
             case "changeDirAbs":
                 tryChangeAbsolutePath(input, data);
                 break;
-            case "readDB":
+            case "readDb":
                 tryReadDatabaseFromFile(input, data);
                 break;
             case "filter":
+                tryPrintFilteredStudents(input, data);
                 break;
             case "order":
+                tryPrintOrderedStudents(input, data);
                 break;
             case "download":
                 break;
             case "downloadAsync":
                 break;
             case "help":
+                //TODO: implement commands
                 break;
             case "open":
                 tryOpenFile(input, data);
@@ -51,6 +54,44 @@ public class CommandInterpreter {
             default:
                 displayInvalidCommand(input);
                 break;
+        }
+    }
+
+    private static void tryPrintFilteredStudents(String input, String[] data) {
+        if (data.length != 3 && data.length != 4) {
+            displayInvalidCommand(input);
+        }
+
+        String course = data[1];
+        String filter = data[2];
+
+        if (data.length == 3) {
+            StudentRepository.printFilteredStudents(course, filter, null);
+        }
+
+        if (data.length == 4) {
+            Integer numberOfStudents = Integer.valueOf(data[3]);
+            StudentRepository.printFilteredStudents(course, filter, numberOfStudents);
+        }
+    }
+
+    private static void tryPrintOrderedStudents(String input, String[] data) {
+        if (data.length != 3 && data.length != 4) {
+            displayInvalidCommand(input);
+            return;
+        }
+
+        String course = data[1];
+        String compareType = data[2];
+        if (data.length == 3) {
+            StudentRepository.printOrderedStudents(course, compareType, null);
+            return;
+        }
+
+        if (data.length == 4) {
+            Integer numberOfStudents = Integer.valueOf(data[3]);
+            StudentRepository.printOrderedStudents(course, compareType, numberOfStudents);
+            return;
         }
     }
 

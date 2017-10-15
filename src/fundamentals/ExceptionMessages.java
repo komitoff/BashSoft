@@ -7,4 +7,5 @@ public class ExceptionMessages {
     public static final String NON_EXISTING_COURSE = "The course does not exist";
     public static final String NON_EXISTING_STUDENT = "The student does not exist";
     public static final String INVALID_PATH = "Invalid path";
+    public static final String INVALID_FILTER = "Invalid filter";
 }
