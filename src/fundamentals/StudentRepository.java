@@ -8,7 +8,7 @@ public class StudentRepository {
     public static boolean isDataInitialized = false;
     public static HashMap<String, HashMap<String, ArrayList<Integer>>> studentsByCourse;
 
-    public static void initializeData() {
+    public static void initializeData(String fileName) {
         if (isDataInitialized) {
             System.out.println(ExceptionMessages.EXAMPLE_EXCEPTION_MESSAGE);
             return;
