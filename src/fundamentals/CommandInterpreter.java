@@ -3,6 +3,7 @@ package fundamentals;
 import io.IOManager;
 import io.OutputWriter;
 import judge.Tester;
+import network.DownloadManager;
 import repository.StudentRepository;
 import static_data.SessionData;
 
@@ -47,8 +48,10 @@ public class CommandInterpreter {
                 tryPrintOrderedStudents(input, data);
                 break;
             case "download":
+                tryDownloadFile(input, data);
                 break;
             case "downloadAsync":
+                tryDownloadFileOnNewThread(input, data);
                 break;
             case "help":
                 //TODO: implement commands
@@ -60,6 +63,27 @@ public class CommandInterpreter {
                 displayInvalidCommand(input);
                 break;
         }
+    }
+
+    private static void tryDownloadFileOnNewThread(String input, String[] data) {
+        if (input.length() != 2) {
+            displayInvalidCommand(input);
+            return;
+        }
+
+        String fileUrl = data[1];
+        DownloadManager.downloadOnNewThread(fileUrl);
+    }
+
+    private static void tryDownloadFile(String input, String[] data) {
+        if (data.length != 2) {
+            displayInvalidCommand(input);
+            return;
+        }
+
+        String fileUrl = data[1];
+        DownloadManager.download(fileUrl);
+
     }
 
     private static void tryPrintFilteredStudents(String input, String[] data) {

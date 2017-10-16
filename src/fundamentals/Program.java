@@ -16,6 +16,10 @@ public class Program {
 //        IOManager.createDirectoryInCurrentFolder("pesho");
 //        IOManager.changeCurrentDirRelativePath("..");
 //        IOManager.createDirectoryInCurrentFolder("testDir");
-        InputReader.readCommands();
+        try {
+            InputReader.readCommands();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
