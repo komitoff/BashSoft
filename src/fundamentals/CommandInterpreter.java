@@ -20,18 +20,16 @@ public class CommandInterpreter {
         String[] data = input.split("\\s+");
         String command = data[0];
         switch (command) {
-            case "quit" :
-                System.exit(1);
-                break;
             case "show" :
                 tryShowWantedCourse(input, data);
                 break;
             case "mkdir":
                 tryCreateDirectory(input, data);
                 break;
-            case "Is":
+            case "ls":
                 tryTraverseDirectory(input, data);
                 break;
+            //must be checked
             case "cmp":
                 tryCompareFiles(input, data);
                 break;

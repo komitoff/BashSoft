@@ -9,6 +9,7 @@ import java.util.LinkedList;
 public class IOManager {
 
     public static void traverseDirectory(int depth) {
+
         LinkedList<File> subFolders = new LinkedList<>();
         String path = SessionData.currentPath;
         int initialIndentation = path.split("\\\\").length;
