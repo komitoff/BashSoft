@@ -9,4 +9,5 @@ public class ExceptionMessages {
     public static final String INVALID_PATH = "Invalid path";
     public static final String INVALID_FILTER = "Invalid filter";
     public static final String FILE_NOT_FOUND = "Malformed url exception";
+    public static final String NO_SUCH_COURSE_FOUND = "There is no such course written";
 }

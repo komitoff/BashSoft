@@ -97,8 +97,13 @@ public class StudentRepository {
         }
 
         OutputWriter.writeMessageOnNewLine(courseName + ":");
-        for (Map.Entry<String, ArrayList<Integer>> student : studentsByCourse.get(courseName).entrySet()) {
-            OutputWriter.printStudent(student.getKey(), student.getValue());
+        if (studentsByCourse.containsKey(courseName)) {
+            for (Map.Entry<String, ArrayList<Integer>> student : studentsByCourse.get(courseName).entrySet()) {
+                OutputWriter.printStudent(student.getKey(), student.getValue());
+            }
+        }
+        else {
+            OutputWriter.writeMessageOnNewLine(ExceptionMessages.NO_SUCH_COURSE_FOUND);
         }
     }
 

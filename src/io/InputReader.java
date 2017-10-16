@@ -28,5 +28,6 @@ public class InputReader {
                 thread.join();
             }
         }
+
     }
 }

@@ -56,6 +56,8 @@ public class DownloadManager {
 
     public static void downloadOnNewThread(String fileUrl) {
         Thread thread = new Thread(() -> download(fileUrl));
+        OutputWriter.writeMessageOnNewLine(String.format("Worker thread %d started downloading...",
+                thread.getId()));
         thread.setDaemon(false);
         thread.start();
     }
