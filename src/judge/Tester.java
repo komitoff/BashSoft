@@ -1,4 +1,6 @@
-package fundamentals;
+package judge;
+
+import io.OutputWriter;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package fundamentals;
+package static_data;
 
 public class SessionData {
 

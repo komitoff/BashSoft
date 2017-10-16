@@ -1,10 +1,14 @@
-package fundamentals;
+package repository;
+
+import static_data.ExceptionMessages;
+import io.OutputWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
 public class RepositoryFilters {
+
     public static void printFilteredStudents(
         HashMap<String, ArrayList<Integer>> courseData,
         String filterType,
@@ -23,8 +27,16 @@ public class RepositoryFilters {
             }
 
             ArrayList<Integer> marks = courseData.get(student);
-            Double averageMark = getStudentAverageGrade(marks);
-            if (filter.test(averageMark)) {
+//            Double averageMark = getStudentAverageGrade(marks);
+            Double averageMark = marks.stream()
+                    .mapToInt(Integer::valueOf)
+                    .average()
+                    .getAsDouble();
+
+            Double percentageOfFulfilment = averageMark / 100;
+            Double mark = percentageOfFulfilment * 4 + 2;
+
+            if (filter.test(mark)) {
                 OutputWriter.printStudent(student, marks);
                 studentCount ++;
             }
@@ -42,15 +54,5 @@ public class RepositoryFilters {
             default:
                 return null;
         }
-    }
-
-    private static Double getStudentAverageGrade(ArrayList<Integer> grades) {
-        Double totalScore = 0d;
-        for (int i = 0; i < grades.size(); i++) {
-            totalScore += grades.get(i);
-        }
-
-        Double percentage = totalScore / (grades.size() * 100);
-        return (percentage * 4) + 2;
     }
 }

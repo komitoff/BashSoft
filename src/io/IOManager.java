@@ -1,4 +1,7 @@
-package fundamentals;
+package io;
+
+import static_data.ExceptionMessages;
+import static_data.SessionData;
 
 import java.io.File;
 import java.util.LinkedList;
